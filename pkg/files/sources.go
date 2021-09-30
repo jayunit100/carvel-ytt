@@ -38,14 +38,17 @@ type StdinSource struct {
 	err   error
 }
 
+// NewStdinSource is a standard input data source.
 func NewStdinSource() StdinSource {
 	// only read stdin once
 	bs, err := ioutil.ReadAll(os.Stdin)
 	return StdinSource{bs, err}
 }
 
+// Description is a field that tells us where this file comes from, in this case, its read literally from the standard input stream, so we call it stdin.yml.
 func (s StdinSource) Description() string           { return "stdin.yml" }
 func (s StdinSource) RelativePath() (string, error) { return "stdin.yml", nil }
+// Bytes is the contents of the standard input stream, which is actually, the contents of the standard input stream.
 func (s StdinSource) Bytes() ([]byte, error)        { return s.bytes, s.err }
 
 type LocalSource struct {
